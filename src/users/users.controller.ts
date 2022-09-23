@@ -22,8 +22,12 @@ export class UsersController {
   }
 
   @UseGuards(AuthGuard('jwt'))
-  @Get('/test')
-  async getUser(@Request() req): Promise<any> {
-    return req.user;
+  @Post('/test')
+  async getUser(@Request() req, @Body('val') val: string): Promise<any> {
+    return {
+      message: 'User Valid',
+      data: val,
+      token: req.user,
+    };
   }
 }
